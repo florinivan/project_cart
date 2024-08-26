@@ -1,9 +1,16 @@
+import React, { FunctionComponent } from 'react';
+import { useGlobalContext } from "./context/context";
 import Navbar from "./components/Navbar";
 import Cart from "./components/Cart";
 import TotalBox from "./components/TotalBox";
-import Loading from "./components/Loading";
-import { useGlobalContext } from "./context/context";
-function App() {
+import Loading from 'context/Loading';
+
+
+
+
+
+
+const App: FunctionComponent = () => {
   const { isLoading, total, products } = useGlobalContext();
   if (isLoading) {
     return (
@@ -28,6 +35,5 @@ function App() {
       {total > 0 && <TotalBox />}
     </div>
   );
-}
-
+};
 export default App;
