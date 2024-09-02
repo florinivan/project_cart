@@ -1,8 +1,10 @@
 import Navbar from "./components/Navbar";
 import Cart from "./components/Cart";
 import TotalBox from "./components/TotalBox";
-import Loading from "./components/Loading";
+import Loading from "./context/Loading";
 import { useGlobalContext } from "./context/context";
+import { FunctionComponent } from "react";
+
 
 const App: FunctionComponent = () => {
   const { isLoading, total, products } = useGlobalContext();

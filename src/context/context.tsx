@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useEffect } from "react";
+import React, {  useContext, useReducer, useEffect } from "react";
 //axios
 import axios from "axios";
 //Import Funzione a cui delego la gestione delle mie funzioni
@@ -16,12 +16,25 @@ import {
   COSTO_TOTALE,
 } from "./actions";
 
+
+
 //URL per le chiamate all API
-const url = "https://react-corso-api.netlify.app/.netlify/functions/cartshop";
+const url:string = "https://react-corso-api.netlify.app/.netlify/functions/cartshop";
+
 
 // Creo il context per essere utilizzato dai miei componenti
-const AppContext = React.createContext();
+ export const AppContext:any = React.createContext(ContextProps);
 
+
+
+type InitialState={
+  products:number;
+  isLoading:boolean;
+  isError:boolean;
+  total:number;
+  itemCounter:number
+}
+export type{InitialState};
 //Stato iniziale del nostro Reducer
 const initialState = {
   products: [],
@@ -30,21 +43,31 @@ const initialState = {
   total: 0,
   itemCounter: 0,
 };
+
 //Componente con cui Wrappare la nostra intera app (o il componente che ha bisogno di accedere ad un determinato provider)
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const deleteItem = (id) => {
+interface ContextProps {
+  deleteItem:(id:number) => void;
+  addQty:(id:number) => void;
+  dimQty:(id:number) => void;
+  deleteAll:() => void; 
+  }
+export default ContextProps;
+
+  const deleteItem = (id:number) => {
     return dispatch({ type: DELETE_ITEM, payload: id });
   };
 
+
   //Aumenta Quantità
-  const addQty = (id) => {
+  const addQty = (id:number) => {
     return dispatch({ type: AUMENTA_QTY, payload: id });
   };
 
   //Riduce quantità singolo elemento
-  const dimQty = (id) => {
+  const dimQty = (id:number) => {
     return dispatch({ type: DIMINUISCI_QTY, payload: id });
   };
 
@@ -93,3 +116,5 @@ const useGlobalContext = () => {
 };
 
 export { useGlobalContext, AppProvider };
+export default AppContext;
+

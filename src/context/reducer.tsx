@@ -10,7 +10,7 @@ import {
   COSTO_TOTALE,
 } from "./actions";
 
-const reducer = (state, action) => {
+const reducer = (state:any, action:any) => {
   //Inizio fetch dei dati
   if (action.type === DATA_FETCHING_STARTED) {
     return { ...state, isError: false, isLoading: false };
@@ -21,7 +21,7 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       isError: false,
-      products: action.payload.map((el) => {
+      products: action.payload.map((el:any) => {
         return { ...el, qty: 1 };
       }),
     };
@@ -34,14 +34,14 @@ const reducer = (state, action) => {
   if (action.type === DELETE_ITEM) {
     return {
       ...state,
-      products: state.products.filter((el) => el._id !== action.payload),
+      products: state.products.filter((el:any) => el._id !== action.payload),
     };
   }
   //Aumento quantità
   if (action.type === AUMENTA_QTY) {
     return {
       ...state,
-      products: state.products.map((el) => {
+      products: state.products.map((el:any) => {
         if (action.payload === el._id) {
           return {
             ...el,
@@ -56,7 +56,7 @@ const reducer = (state, action) => {
   if (action.type === DIMINUISCI_QTY) {
     return {
       ...state,
-      products: state.products.map((el) => {
+      products: state.products.map((el:any) => {
         if (action.payload === el._id) {
           return {
             ...el,
@@ -71,7 +71,7 @@ const reducer = (state, action) => {
   if (action.type === COSTO_TOTALE) {
     return {
       ...state,
-      total: state.products.reduce((total, item) => {
+      total: state.products.reduce((total:number, item:any) => {
         return total + item.price * item.qty;
       }, 0),
     };
@@ -80,7 +80,7 @@ const reducer = (state, action) => {
   if (action.type === CONTATORE) {
     return {
       ...state,
-      itemCounter: state.products.reduce((total, item) => {
+      itemCounter: state.products.reduce((total:number, item:any) => {
         return total + item.qty;
       }, 0),
     };

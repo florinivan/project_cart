@@ -1,24 +1,25 @@
-import { FunctionComponent } from "react";
-import { useGlobalContext } from "context/context";
+import React, { FunctionComponent } from "react";
 import { BiPlus, BiMinus } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import React from "react";
+import { useGlobalContext } from "../context/context";
 
-//*ho fatto il FunctionComponent di CartItem e aggiunto i suoi prorps.
 
- interface CartItemProps{
-  _id:number;
-  image:string;
-  name:string;
-  price:number;
-  countInStock:number;
-  qty:number;
-  }
 
-const CartItem: FunctionComponent <CartItemProps>= ({_id, image, name, price, countInStock, qty }) => {
-    const  {deleteItem, addQty, dimQty} = useGlobalContext();
+//* ho fatto il Componente e aggiunto i suoi props
+interface CartItemProps{
+_id:number;
+image:string;
+name:string;
+price:number;
+countInStock:number;
+qty:number;
+}
 
-const diminuisciQty = (id:number) => {
+
+const CartItem:FunctionComponent <CartItemProps>= ({ _id, image, name, price, countInStock, qty }) => {
+  const { deleteItem, addQty, dimQty } = useGlobalContext();
+
+  const diminuisciQty = (id:number) => {
     if (qty - 1 <= 0) {
       deleteItem(id);
     } else {
@@ -41,7 +42,7 @@ const diminuisciQty = (id:number) => {
       <p className="prd-name">{name}</p>
       <div className="qty-selector">
         <button className="btn icon-btn" onClick={() => aggiungiQty(_id)}>
-          <BiPlus className ="icon" />
+          <BiPlus className="icon" />
         </button>
         <p> {qty} </p>
         <button className="btn icon-btn ">
