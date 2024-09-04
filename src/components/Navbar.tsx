@@ -1,10 +1,11 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { HiShoppingCart } from "react-icons/hi";
-import { useGlobalContext } from "../context/context";
+import { useGlobalContext } from "../context/context"
 
-const Navbar = () => {
+
+const Navbar: FunctionComponent = () => {
   const { isLoading, itemCounter } = useGlobalContext();
-
+   
   return (
     <nav className="nav">
       <header className="nav-header">

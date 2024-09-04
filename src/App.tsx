@@ -1,13 +1,28 @@
 import Navbar from "./components/Navbar";
 import Cart from "./components/Cart";
-import TotalBox from "./components/TotalBox";
-import Loading from "./context/Loading";
-import { useGlobalContext } from "./context/context";
+import AppContext, { useGlobalContext } from "./context/context";
 import { FunctionComponent } from "react";
+import CartItem from "./components/CartItem";
+
 
 
 const App: FunctionComponent = () => {
+  return (
+    //*racchiudo la parte del nostro codice in un provider Context.
+
+    <AppContext.Provider value>
+      <Cart/>
+      {CartItem}
+      {Navbar}
+
+      
+    </AppContext.Provider>
+  )
+  
+}
+   
   const { isLoading, total, products } = useGlobalContext();
+  
   if (isLoading) {
     return (
       <div>

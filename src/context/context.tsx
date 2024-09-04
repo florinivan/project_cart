@@ -22,8 +22,17 @@ import {
 const url:string = "https://react-corso-api.netlify.app/.netlify/functions/cartshop";
 
 
+//*creo il contesto e il suo interface .
+interface AppContextType {
+  deleteitem:(id:number) => void;
+  addQty:(id:number) => void;
+  dimQty:(id:number) => void;
+  deleteAll:() => void; 
+ 
+}
+
 // Creo il context per essere utilizzato dai miei componenti
- export const AppContext:any = React.createContext(ContextProps);
+ export const AppContext:any = React.createContext<AppContextType | null>;
 
 
 
@@ -47,14 +56,6 @@ const initialState = {
 //Componente con cui Wrappare la nostra intera app (o il componente che ha bisogno di accedere ad un determinato provider)
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-interface ContextProps {
-  deleteItem:(id:number) => void;
-  addQty:(id:number) => void;
-  dimQty:(id:number) => void;
-  deleteAll:() => void; 
-  }
-export default ContextProps;
 
   const deleteItem = (id:number) => {
     return dispatch({ type: DELETE_ITEM, payload: id });

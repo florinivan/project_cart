@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { BiPlus, BiMinus } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { useGlobalContext } from "../context/context";
+import  { useGlobalContext } from "../context/context";
+
 
 
 
@@ -18,6 +19,9 @@ qty:number;
 
 const CartItem:FunctionComponent <CartItemProps>= ({ _id, image, name, price, countInStock, qty }) => {
   const { deleteItem, addQty, dimQty } = useGlobalContext();
+
+
+ 
 
   const diminuisciQty = (id:number) => {
     if (qty - 1 <= 0) {
